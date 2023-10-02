@@ -14,5 +14,8 @@ npx hardhat run scripts/deploy.js //With the changes we deploy it to goerli netw
 #Deploy with React 
 cd client
 npm run dev
+
+#Visit project at:
+https://tzaff-coffee.netlify.app/
 ```
 
