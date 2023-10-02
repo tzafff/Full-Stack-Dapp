@@ -10,8 +10,9 @@ npx hardhat test
 REPORT_GAS=true npx hardhat test
 npx hardhat node
 npx hardhat run scripts/deploy.js //With the changes we deploy it to goerli network not with hardhat
-```
 
 #Deploy with React 
 cd client
 npm run dev
+```
+
