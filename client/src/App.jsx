@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState,useEffect } from 'react'
 import abi from "./contractJson/chai.json"
 import {ethers} from "ethers"
 import Memos from './components/Memos'
 import Buy from './components/Buy'
+import chai from "./chai.png";
 import './App.css'
 
 function App() {
@@ -28,7 +29,12 @@ function App() {
         const account = await ethereum.request({
           method:"eth_requestAccounts"
         })
-        setAccount(account);
+
+        window.ethereum.on("accountsChanged",()=>{
+          window.location.reload()
+        }) //Not working properly!!!
+
+        setAccount(account[0]);
         const provider = new ethers.providers.Web3Provider(ethereum); //read the Blockchain
         const signer =  provider.getSigner(); //write the blockchain
 
@@ -40,16 +46,22 @@ function App() {
         console.log(contract);
         setState({provider,signer,contract})
       }catch(error){
-        alert(error)
+        //alert(error)
       }
     }
     template();
   },[])
   return (
-      <div className='App'>
-        <Buy></Buy>
-        <Memos></Memos>
-      </div>
+    <div >
+    <img src={chai} className="img-fluid" alt=".." width="100%" />
+    <p style={{ marginTop: "10px", marginLeft: "5px" }}>
+      <small>Connected Account - {account}</small>
+    </p>
+   
+      <Buy state={state} />
+      <Memos state={state} />
+   
+  </div>
   )
 }
 
